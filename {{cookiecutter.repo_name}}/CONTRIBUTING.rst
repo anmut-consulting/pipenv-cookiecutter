@@ -91,6 +91,9 @@ Now you can make your changes locally.
     # to run coverage test only, run:
     $ pipenv run coverage
 
+    # to run the pytest tests, run:
+    $ pipenv run pytest
+
     # to run the pre-commit PUSH hooks, run:
     $ pipenv run push_test
 

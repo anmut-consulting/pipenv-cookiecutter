@@ -1,0 +1,25 @@
+name: Tag on Merge
+on:
+  pull_request:
+    types: [ closed ]
+    branches: [ main, master ]
+  workflow_dispatch:  # Go to [Actions] - select Tag on Merge -> [Run workflow]
+jobs:
+  update-tags:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+    - name: clone
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 1
+        ref: ${{ github.event.pull_request.base.ref }}
+    - name: version-compare
+      id: version-compare
+      run: |
+        CUR_VER=$(grep "current_version = " setup.cfg|cut -d " " -f3)
+        git config user.name = github-actions
+        git config user.email = github-actions@github.com
+        git tag -f ${CUR_VER}
+        git tag -f latest
+        git push -f --tags --no-verify

@@ -27,18 +27,24 @@ repos:
     - id: autoflake
       args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
 
-- repo: https://github.com/timothycrosley/isort
-  rev: 5.0.9
-  hooks:
-  - id: isort
-
-- repo: https://github.com/ambv/black
-  rev: 20.8b1
-  hooks:
-  - id: black
-
 - repo: local
   hooks:
+  - id: isort
+    name: isort
+    entry: isort
+    language: python
+    'types': [python]
+    args: []
+    require_serial: false
+    additional_dependencies: []
+
+  - id: black
+    name: black
+    language: system
+    entry: black
+    require_serial: true
+    types_or: [python, pyi]
+
   - id: flake8
     name: flake8
     language: system
@@ -65,21 +71,6 @@ repos:
     entry: pipenv run mypy
     types: [python]
     require_serial: true
-
-  - id: pytest
-    name: pytest
-    language: system
-    entry: pipenv run pytest
-    types: [python]
-    pass_filenames: false
-
-  - id: pytest-cov
-    name: "pytest coverage"
-    stages: [push]
-    language: system
-    entry: pipenv run pytest --cov --cov-fail-under=100 --cov-report term-missing:skip-covered
-    types: [python]
-    pass_filenames: false
 
 - repo: https://github.com/anmut-consulting/pipenv-setup
   rev: master

@@ -1,4 +1,4 @@
-|Github Test| |Pre-Commit|
+|Github Test| |Pre-Commit| |iSort| |Black|
 
 .. image:: images/anmut_logo.png
     :width: 200
@@ -61,3 +61,7 @@ This package was created with `Cookiecutter`_ and the `anmut-consulting/pipenv-c
 .. |Pre-Commit| image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
    :target: https://github.com/pre-commit/pre-commit
    :alt: pre-commit
+.. |iSort| image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336
+    :target: https://pycqa.github.io/isort/
+.. |Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
