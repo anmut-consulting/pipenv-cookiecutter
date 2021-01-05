@@ -22,7 +22,7 @@ jobs:
       with:
         fetch-depth: 1
         path: base
-        ref: ${{ github.event.pull_request.base.sha }}
+        ref: ${{ '{{' }} github.event.pull_request.base.sha {{ '}}' }}
 
     - name: setup-python
       id: setup-python
@@ -40,7 +40,7 @@ jobs:
         CUR_VER=$(grep "current_version = " ../base/setup.cfg|cut -d " " -f3)
         git config user.name = github-actions
         git config user.email = github-actions@github.com
-        bumpversion --current-version ${CUR_VER} ${{ github.event.inputs.release_type }} --no-tags
+        bumpversion --current-version ${CUR_VER} ${{ '{{' }} github.event.inputs.release_type {{ '}}' }} --no-tags
         NEW_VER=$(grep "current_version = " setup.cfg|cut -d " " -f3)
         if [[ $NEW_VER > $CUR_VER ]]; then
             echo "All good!"; else

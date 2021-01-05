@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@master
       with:
         fetch-depth: 1
-        ref: ${{ github.event.pull_request.base.ref }}
+        ref: ${{ '{{' }} github.event.pull_request.base.ref {{ '}}' }}
     - name: version-compare
       id: version-compare
       run: |

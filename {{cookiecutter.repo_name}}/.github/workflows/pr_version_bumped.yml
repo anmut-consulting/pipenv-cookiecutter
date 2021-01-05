@@ -13,13 +13,13 @@ jobs:
       with:
         fetch-depth: 1
         path: pull_request
-        ref: ${{ github.event.pull_request.head.ref }}
+        ref: ${{ '{{' }} github.event.pull_request.head.ref {{ '}}' }}
     - name: clone base branch
       uses: actions/checkout@master
       with:
         fetch-depth: 1
         path: base
-        ref: ${{ github.event.pull_request.base.sha }}
+        ref: ${{ '{{' }} github.event.pull_request.base.sha {{ '}}' }}
     - name: version-compare
       id: version-compare
       run: |
