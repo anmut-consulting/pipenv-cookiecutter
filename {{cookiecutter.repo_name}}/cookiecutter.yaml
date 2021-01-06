@@ -1,8 +1,9 @@
-full_name: {{ cookiecutter.full_name }}
-email: {{ cookiecutter.email }}
-project_name: {{ cookiecutter.project_name }}
-repo_name: {{ cookiecutter.repo_name }}
-project_short_description: {{ cookiecutter.project_short_description }}
-python_version: {{ cookiecutter.python_version }}
-version: {{ cookiecutter.version }}
-open_source_license: {{ cookiecutter.open_source_license }}
+default_context:
+  full_name: {{ cookiecutter.full_name }}
+  email: {{ cookiecutter.email }}
+  project_name: {{ cookiecutter.project_name }}
+  repo_name: {{ cookiecutter.repo_name }}
+  project_short_description: {{ cookiecutter.project_short_description }}
+  python_version: {{ cookiecutter.python_version }}
+  version: {{ cookiecutter.version }}
+  open_source_license: {{ cookiecutter.open_source_license }}
