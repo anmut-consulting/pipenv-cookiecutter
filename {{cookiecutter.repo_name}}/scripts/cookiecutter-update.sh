@@ -29,5 +29,5 @@ git checkout $CURRENT_BRANCH
 git diff ${CURRENT_BRANCH}..cookiecutter-update
 echo "*******************************************************"
 echo "-> You can use 'git diff ${CURRENT_BRANCH}..cookiecutter-update' to see the changes."
-echo "-> Interactively pull in the changes (either in git or in PyCharm or your IDE) you want."
-echo "-> To use git, simply run 'git rebase -i cookiecutter-update'"
+echo "-> Interactively pull in the changes you want. You could use git (not recommended) or PyCharm or your IDE with git tools."
+echo "-> To use git, run 'git checkout cookiecutter-update [filename]' but PLEASE CHECK THE DIFFS before committing."
