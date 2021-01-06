@@ -58,7 +58,7 @@ autoapi_ignore = ["*migrations*", "*ipynb_checkpoints*"]
 todo_include_todos = True
 todo_link_only = True
 
-# # Autodoc settings - superceded by autoapi 
+# # Autodoc settings - superceded by autoapi
 # # but could still be useful to document a specific section only
 # autodoc_default_flags = [
 #     "members",
