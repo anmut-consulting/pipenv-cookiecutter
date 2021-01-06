@@ -28,6 +28,7 @@ ipython = "*"
 [scripts]
 init = "pipenv run $SHELL scripts/init.sh"
 git_setup = "pipenv run $SHELL scripts/git-setup.sh"
+cookiecutter_update = "pipenv run $SHELL scripts/cookiecutter-update.sh"
 commit_test = "pipenv run pre-commit run --hook-stage commit"
 push_test = "pipenv run pre-commit run --hook-stage push"
 coverage = "pipenv run pytest --cov --cov-fail-under=100 --cov-report term-missing:skip-covered"
