@@ -1,4 +1,5 @@
 default_context:
+  template: anmut-consulting/pipenv-cookiecutter.git
   full_name: {{ cookiecutter.full_name }}
   email: {{ cookiecutter.email }}
   project_name: {{ cookiecutter.project_name }}
