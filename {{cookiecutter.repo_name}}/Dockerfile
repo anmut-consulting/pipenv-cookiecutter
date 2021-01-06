@@ -1,4 +1,4 @@
-FROM python:{python_version}-slim AS base
+FROM python:{{ cookiecutter.python_version }}-slim AS base
 
 # Setup env
 ENV LANG C.UTF-8
