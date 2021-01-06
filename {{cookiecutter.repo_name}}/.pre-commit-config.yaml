@@ -33,7 +33,7 @@ repos:
     name: isort
     entry: pipenv run isort .
     language: python
-    'types': [python]
+    types: [python]
     args: []
     require_serial: false
     additional_dependencies: []
