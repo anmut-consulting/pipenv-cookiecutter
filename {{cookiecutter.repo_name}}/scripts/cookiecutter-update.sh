@@ -21,6 +21,9 @@ pipx run cookiecutter gh:anmut-consulting/pipenv-cookiecutter --config-file cook
 rm -rf tests && git checkout $CURRENT_BRANCH tests || echo "tests not affected"
 rm -rf $REPO_NAME && git checkout $CURRENT_BRANCH $REPO_NAME || echo " $REPO_NAME not affected"
 rm -rf  && git checkout $CURRENT_BRANCH $REPO_NAME || echo " $REPO_NAME not affected"
+git reset USAGE.rst || echo ""
+git reset HISTORY.rst || echo ""
+git reset AUTHORS.rst || echo ""
 git add . && git commit -m "Cookiecutter updates" --no-verify
 git checkout $CURRENT_BRANCH
 git diff ${CURRENT_BRANCH}..cookiecutter-update
