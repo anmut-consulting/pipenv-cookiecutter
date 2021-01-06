@@ -29,6 +29,14 @@ repos:
 
 - repo: local
   hooks:
+  - id: add inits
+    name: add_inits
+    language: system
+    entry: bash -c \
+      "for DIR in $(find \"./{{ cookiecutter.repo_name }}\" -type d); do
+        touch $DIR/__init__.py;
+      done"
+
   - id: isort
     name: isort
     entry: pipenv run isort .
