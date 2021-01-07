@@ -73,14 +73,20 @@ pipenv run init
 ```
 [see here for details](./{{cookiecutter.repo_name}}/scripts/init.sh)
 
+
+> You will see errors on this step. **Don't be alarmed!**, this is by design to preformat the repo.  **See the note under point 5 below**
+
 Finally, remember to actually activate the environment when you want to interact with the code! From the same newly-created folder:
 ```
 pipenv shell
 ```
 
-## Manually linking your local project to the remote repository
-The init script should take care of linking your local project up to the remote repo (if you followed the instructions).
-If something went wrong, here's how to do it manually:
+## Linking your local project to the remote repository
+If you've already created the repo on Gihub, you can run the command below to link your local repository to the Github remote:
+```
+pipenv run git_setup
+```
+Here's how to do it manually:
 
 1.  Ensure a new repository exists on your online GitHub platform.
 > To avoid errors, **do not** initialize the new repository with README, license, or gitignore files. You can add these files after your project has been pushed to your remote of choice (GitHub, GitLab, etc...).
@@ -114,6 +120,10 @@ git remote -v
 git push -u origin master
 # Pushes the changes in your local repository up to the remote repository you specified as the origin
 ```
+
+## Set branch protection on Github
+This cookiecutter generates a repo designed to work with Github's branch protection.  To set that up, see [their documentation](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/defining-the-mergeability-of-pull-requests).  You want to protect **master** or **main** at least and configure it to require the `check-versions` and `test` actions.
+> Note that you will likely need to have created your first pull request fewer than 7 days ago for these tests to show up on Github.
 
 ## Update SharePoint links
 The cookiecutter template README.rst comes with generic links to the Distributions and Documentation SharePoint folders that will need updating once you have followed all the instructions above.
