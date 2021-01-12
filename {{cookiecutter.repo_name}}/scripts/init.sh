@@ -18,7 +18,12 @@ echo "-> initialise local git repo"
     pre-commit install -t pre-commit
     pre-commit install -t pre-push
 
-    echo "-> running preliminary tests"
+    echo "-> adding files and running preliminary tests"
+    git add .
+    pipenv run tests
+
+    echo "-> adding formatted files back and running tests again"
+    git add .
     pipenv run tests
 
     echo "Creating ipython kernel for use with Jupyter"
