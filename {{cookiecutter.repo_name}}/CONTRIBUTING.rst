@@ -79,7 +79,7 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.repo_name }}` for loc
 
     $ git checkout -b PLAT-XX_ticket_name_here
 
-Now you can make your changes locally.
+  Now you can make your changes locally.
 
 5. When you're done making changes, check that your changes pass all the tests by running::
 
@@ -108,6 +108,22 @@ Now you can make your changes locally.
 
 7. Submit a pull request through the GitHub website.
 
+8. Use the New Version tool on Github to bump the version - this will be a requirement on a repo that is set up correctly.  See **Branch Protection** in the [Cookiecutter README](https://github.com/anmut-consulting/pipenv-cookiecutter/blob/master/README.md) for more details.
+
+    1.  Click on **[Actions]**
+    2.  Select **New Version** on the left
+    3.  Click on the **[Run Workflow]** button
+    4.  Select the PR branch
+    5.  Enter the version bump type:
+
+        - **patch**: small fixes and performance improvements
+        - **minor**: additional functionality introduced with no breaking changes (backwards compatible)
+        - **major**: changes to existing functions that will cause old code to behave differently/break things.  *A good way to identify this is if existing tests failed and you had to modify the tests.*
+
+    6.  You will see a new commit on that PR/branch that bumps the version shortly after clicking **[Run workflow]**
+    7.  That will cause the **PR version bumped** test to pass, if everything went well.
+
+
 Pull Request Guidelines
 -----------------------
 
@@ -135,11 +151,10 @@ You can check the command next to each of the **entry:** lines in :file:`.pre-co
 
 Check the [scripts] section in :file:`Pipfile` to see the shortcuts you can run with ``$ pipenv run ..``, i.e. ``$ pipenv run coverage``.
 
-Deploying
+Creating Releases
 ---------
 
-A reminder for the maintainers on how to deploy.
-Make sure all your changes are committed (including an entry in :file:`HISTORY.rst`).
-Then run::
+New releases are automatically created for anything that is merged into master.  A versioned tag corresponding to the code version is created on Github and the **latest** tag is updated to, well, the latest version.
+**This happens automatically and requires no action on your part.**  (If you'd like to understand how, check :file:`.github/workflows/tags_on_merge.yml` for the responsible file/configuration.
 
-  $ pipenv run release [major/minor/patch]
+> Remember to amend your :file:`HISTORY.rst` to reflect the changes your PR introduces, especially if they are significant.
