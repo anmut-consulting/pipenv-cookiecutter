@@ -1,6 +1,6 @@
 |Github Test| |Pre-Commit| |iSort| |Black|
 
-.. image:: images/anmut_logo.png
+.. image:: docs/images/anmut_logo.png
     :width: 200
     :align: center
 
