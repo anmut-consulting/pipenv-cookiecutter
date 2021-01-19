@@ -20,7 +20,6 @@ git checkout -b cookiecutter-update || exit 1
 pipx run cookiecutter gh:anmut-consulting/pipenv-cookiecutter --config-file cookiecutter.yaml --output-dir .. -f --no-input
 rm -rf tests && git checkout $CURRENT_BRANCH tests || echo "tests not affected"
 rm -rf $REPO_NAME && git checkout $CURRENT_BRANCH $REPO_NAME || echo " $REPO_NAME not affected"
-rm -rf  && git checkout $CURRENT_BRANCH $REPO_NAME || echo " $REPO_NAME not affected"
 git checkout $CURRENT_BRANCH USAGE.rst || echo ""
 git checkout $CURRENT_BRANCH HISTORY.rst || echo ""
 git checkout $CURRENT_BRANCH AUTHORS.rst || echo ""
