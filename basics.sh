@@ -64,26 +64,25 @@
     then
         echo 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
     fi
+    if ! grep -Fxq 'export SYSTEM_VERSION_COMPAT=1' ~/.zshrc
+    then
+        echo 'export SYSTEM_VERSION_COMPAT=1' >> ~/.zshrc
+    fi
     source ~/.zshrc \
 
     echo "\n-> installing software from homebrew casks:"
-    echo "   google-chrome lastpass mysqlworkbench slack sublime-text the-unarchiver whatsapp"
+    echo "this is a minimal list to get you started"
     {
-        brew cask install authy
-        brew cask install docker
-        brew cask install google-chrome
-        brew cask install lastpass
-        brew cask install mysqlworkbench
-        brew cask install pg-commander
-        brew cask install sublime-text
-        brew cask install the-unarchiver
+        brew install --cask authy
+        brew install --cask docker
+        brew install --cask google-chrome
+        brew install --cask dashlane
+        brew install --cask dbeaver-community
+        brew install --cask sublime-text
+        brew install --cask the-unarchiver
+        brew install --cask pycharm-ce
+        brew install --cask drawio
         pipx ensurepath && source ~/.zshrc
-        # Uncomment block if you want to install the microsoft stuff
-        echo "\n-> installing microsoft stuff from homebrew casks:"
-        echo "   microsoft-edge microsoft-office microsoft-teams"
-        brew cask install microsoft-edge
-        brew cask install microsoft-teams
-        brew cask install drawio
     } \
     && echo "\n-> installation from homebrew casks successfull <-\n"
 
@@ -101,17 +100,6 @@
     && git config --global init.templateDir ~/.git-template \
     && pre-commit init-templatedir ~/.git-template -t pre-commit -t pre-push \
     && echo "\n-> pre-commit configured <-"
-
-    echo "\nIf you don't yet know magnet for OSX, you're wasting time resizing windows!"
-    echo "Here's the link: https://apps.apple.com/gb/app/magnet/id441258766?mt=12"
-    read -p "Do you want to open that link now? [y/n]" -t 5 REPLY
-    case $REPLY in
-        [yY])
-            open "https://apps.apple.com/gb/app/magnet/id441258766?mt=12"
-        ;;
-        *)
-        ;;
-    esac
 ) \
 && (
     echo "\n"
