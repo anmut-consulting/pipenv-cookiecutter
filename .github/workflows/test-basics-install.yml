@@ -4,11 +4,14 @@ name: Manual workflow
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
-on: workflow_dispatch
+on:
+  pull_request:
+    types: [ assigned, edited, opened, ready_for_review, reopened, synchronize ]
+    branches: [ main, master ] 
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
   basics_install:
     # Run on a BigSur machine
     runs-on: macos-latest
