@@ -8,14 +8,14 @@ on:
   pull_request:
     types: [ assigned, edited, opened, ready_for_review, reopened, synchronize ]
     branches: [ main, master ]
-  workflow_dispatch:  # Go to [Actions] - select PR version bumped -> [Run workflow]
+  workflow_dispatch
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
   basics_install:
     # Run on a BigSur machine
-    runs-on: macos-11.0
+    runs-on: macos-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # First clone the branch involved in the PR
