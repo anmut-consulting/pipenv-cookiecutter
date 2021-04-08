@@ -28,9 +28,4 @@ jobs:
     - name: run basics.sh
       id: basics-install
       run: |
-        cd ~/pipenv-cookiecutter
-        chmod +x basics.sh
         /bin/bash basics.sh
-
-      
-
