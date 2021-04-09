@@ -87,8 +87,8 @@
         && pipx install pipenv-pipes \
         && pipx install pipenv-setup \
         && pipx install pre-commit ) \
-    && echo "finished installing python tools" \
-    && source ~/.zshrc \
+    && echo "finished installing python tools"
+    source ~/.zshrc \
     && echo "\n-> pipx installations complete <-" \
     && echo "\n-> configuring git to run pre-commit hooks, when found, automatically:" \
     && git config --global init.templateDir ~/.git-template \
