@@ -88,19 +88,16 @@
         pipx install pipenv \
         && pipx install pipenv-pipes \
         && pipx install pipenv-setup \
-        && pipx install pre-commit
-    ) \
+        && pipx install pre-commit ) \
     && source ~/.zshrc \
     && echo "\n-> pipx installations complete <-" \
     && echo "\n-> configuring git to run pre-commit hooks, when found, automatically:" \
     && git config --global init.templateDir ~/.git-template \
     && pre-commit init-templatedir ~/.git-template -t pre-commit -t pre-push \
-    && echo "\n-> pre-commit configured <-"
-) \
+    && echo "\n-> pre-commit configured <-" ) \
 && (
     echo "\n"
     echo "================== INSTALLATION COMPLETE! =================="
     echo "CLOSE ALL TERMINAL WINDOWS AND REOPEN TO ENSURE CORRECT PATH"
     echo "================== INSTALLATION COMPLETE! =================="
-    echo "\n"
-) && osascript -e 'tell application "Terminal" to close (every window)' && exit 0 || exit 1
+    echo "\n" ) && osascript -e 'tell application "Terminal" to close (every window)' && exit 0 || exit 1
