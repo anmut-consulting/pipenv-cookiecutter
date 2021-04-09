@@ -98,4 +98,4 @@
     echo "================== INSTALLATION COMPLETE! =================="
     echo "CLOSE ALL TERMINAL WINDOWS AND REOPEN TO ENSURE CORRECT PATH"
     echo "================== INSTALLATION COMPLETE! =================="
-    echo "\n" ) && osascript -e 'tell application "Terminal" to close (every window)' && exit 0 || exit 1
+    echo "\n" ) && echo 'tell application "Terminal" to close (every window)' && exit 0 || exit 1
