@@ -26,7 +26,6 @@
         && {
           brew install zsh
           brew install python3
-          brew install awscli
           brew install cmake
           brew install git
           brew install htop
@@ -45,7 +44,7 @@
           brew install pipx
           brew install pyenv
           brew install watch
-          brew tap heroku/brew && brew install heroku
+#          brew tap heroku/brew && brew install heroku
         }
     } \
     && echo "\n-> packages installed from brew! <-\n"
@@ -70,7 +69,6 @@
     echo "\n-> installing software from homebrew casks:"
     echo "this is a minimal list to get you started"
     (
-        brew install --cask authy
         brew install --cask docker
         brew install --cask google-chrome
         brew install --cask dashlane
