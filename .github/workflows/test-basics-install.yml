@@ -1,0 +1,41 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  pull_request:
+    types: [ assigned, edited, opened, ready_for_review, reopened, synchronize ]
+    branches: [ main, master ]
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  basics_install:
+    # Run on a BigSur machine
+    runs-on: macos-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Clone PR branch if this is triggered on a PR
+    - name: clone PR branch
+      uses: actions/checkout@master
+      if: github.event_name == 'pull_request'
+      with:
+        fetch-depth: 1
+        path: code_folder
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    # Clone the master branch if it is a manual trigger 
+    - name: clone Master branch
+      uses: actions/checkout@master
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        fetch-depth: 1
+        path: code_folder
+        ref: ${{ github.event.workflow_dispatch.head.ref }}
+        
+    - name: run basics.sh
+      id: basics-install
+      run: |
+        /bin/bash $GITHUB_WORKSPACE/code_folder/basics.sh
