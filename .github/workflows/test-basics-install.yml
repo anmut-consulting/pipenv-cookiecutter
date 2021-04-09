@@ -8,30 +8,34 @@ on:
   pull_request:
     types: [ assigned, edited, opened, ready_for_review, reopened, synchronize ]
     branches: [ main, master ]
-  workflow_dispatch:  # Go to [Actions] - select PR version bumped -> [Run workflow]
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
   basics_install:
     # Run on a BigSur machine
-    runs-on: macos-11.0
+    runs-on: macos-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # First clone the branch involved in the PR
+    # Clone PR branch if this is triggered on a PR
     - name: clone PR branch
       uses: actions/checkout@master
+      if: github.event_name == 'pull_request'
       with:
         fetch-depth: 1
-        path: pull_request
+        path: code_folder
         ref: ${{ github.event.pull_request.head.ref }}
+
+    # Clone the master branch if it is a manual trigger 
+    - name: clone Master branch
+      uses: actions/checkout@master
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        fetch-depth: 1
+        path: code_folder
+        ref: ${{ github.event.workflow_dispatch.head.ref }}
         
     - name: run basics.sh
       id: basics-install
       run: |
-        cd ~/pipenv-cookiecutter
-        chmod +x basics.sh
-        /bin/bash basics.sh
-
-      
-
+        /bin/bash $GITHUB_WORKSPACE/code_folder/basics.sh
