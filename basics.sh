@@ -14,7 +14,6 @@
     xcode-select --install \
     && echo "\n-> xcode cli installed <-\n" \
     || echo " "
-
     echo "\n-> installing homebrew: \n"
     {
         if ! [[ $(brew --version) ]];
@@ -50,7 +49,6 @@
         }
     } \
     && echo "\n-> packages installed from brew! <-\n"
-
     touch ~/.zshrc
     if ! grep -Fxq 'export PYENV_ROOT="$HOME/.pyenv"' ~/.zshrc
     then
@@ -68,8 +66,7 @@
     then
         echo 'export SYSTEM_VERSION_COMPAT=1' >> ~/.zshrc
     fi
-    source ~/.zshrc \
-
+    source ~/.zshrc
     echo "\n-> installing software from homebrew casks:"
     echo "this is a minimal list to get you started"
     {
@@ -85,7 +82,6 @@
         pipx ensurepath && source ~/.zshrc
     } \
     && echo "\n-> installation from homebrew casks successfull <-\n"
-
     echo "\n-> installing from pipx: "
     echo "   pipenv pipenv-pipes pipenv-setup pre-commit"
     (
