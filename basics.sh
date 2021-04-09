@@ -69,7 +69,7 @@
     source ~/.zshrc
     echo "\n-> installing software from homebrew casks:"
     echo "this is a minimal list to get you started"
-    {
+    (
         brew install --cask authy
         brew install --cask docker
         brew install --cask google-chrome
@@ -80,15 +80,16 @@
         brew install --cask pycharm-ce
         brew install --cask drawio
         pipx ensurepath && source ~/.zshrc
-    } \
+    ) \
     && echo "\n-> installation from homebrew casks successfull <-\n"
-    echo "\n-> installing from pipx: "
-    echo "   pipenv pipenv-pipes pipenv-setup pre-commit"
-    (
+    echo "\n-> installing from pipx:"
+    echo "   pipenv pipenv-pipes pipenv-setup pre-commit" \
+    && (
         pipx install pipenv \
         && pipx install pipenv-pipes \
         && pipx install pipenv-setup \
         && pipx install pre-commit ) \
+    && echo "finished installing python tools" \
     && source ~/.zshrc \
     && echo "\n-> pipx installations complete <-" \
     && echo "\n-> configuring git to run pre-commit hooks, when found, automatically:" \
