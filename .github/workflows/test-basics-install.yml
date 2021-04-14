@@ -15,8 +15,6 @@ jobs:
   basics_install:
     # Run on a BigSur machine
     runs-on: macos-latest
-    # run this job only if the basics.sh file has been changed
-    if: contains(steps.changed-files.outputs.modified_files, 'basics.sh')
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Clone PR branch if this is triggered on a PR
@@ -39,5 +37,7 @@ jobs:
         
     - name: run basics.sh
       id: basics-install
+      # run this job only if the basics.sh file has been changed
+      if: contains(steps.changed-files.outputs.modified_files, 'basics.sh')
       run: |
         /bin/bash $GITHUB_WORKSPACE/code_folder/basics.sh
