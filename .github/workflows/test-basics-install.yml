@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Test Environment Setup
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -37,5 +37,7 @@ jobs:
         
     - name: run basics.sh
       id: basics-install
+      # run this job only if the basics.sh file has been changed
+      if: contains(steps.changed-files.outputs.modified_files, 'basics.sh')
       run: |
         /bin/bash $GITHUB_WORKSPACE/code_folder/basics.sh
