@@ -37,7 +37,5 @@ jobs:
         
     - name: run basics.sh
       id: basics-install
-      # run this job only if the basics.sh file has been changed
-      if: contains(steps.changed-files.outputs.modified_files, 'basics.sh')
       run: |
         /bin/bash $GITHUB_WORKSPACE/code_folder/basics.sh
