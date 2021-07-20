@@ -79,6 +79,9 @@
         brew install --cask drawio
         pipx ensurepath && source ~/.zshrc
     } && echo "\n-> installation from homebrew casks successfull <-\n"
+    echo "Adding compiler flags for bzip2"
+    echo "export LDFLAGS=-L/usr/local/opt/bzip2/lib" >> ~/.zshrc
+    echo "export CPPFLAGS=-I/usr/local/opt/bzip2/include" >> ~/.zshrc
     echo "\n-> installing from pipx:"
     echo "   pipenv pipenv-pipes pipenv-setup pre-commit"
     {
