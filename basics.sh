@@ -61,21 +61,15 @@
     then
         echo 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
     fi
-    if ! grep -Fxq 'export SYSTEM_VERSION_COMPAT=1' ~/.zshrc
-    then
-        echo 'export SYSTEM_VERSION_COMPAT=1' >> ~/.zshrc
-    fi
     source ~/.zshrc
     echo "\n-> installing software from homebrew casks:"
     echo "this is a minimal list to get you started"
     {
         brew install --cask docker
-        brew install --cask google-chrome
         brew install --cask dashlane
         brew install --cask dbeaver-community
         brew install --cask sublime-text
         brew install --cask the-unarchiver
-        brew install --cask pycharm-ce
         brew install --cask drawio
         pipx ensurepath && source ~/.zshrc
     } && echo "\n-> installation from homebrew casks successfull <-\n"
