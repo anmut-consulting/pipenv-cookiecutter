@@ -1,7 +1,7 @@
 # See https://pre-commit.com/ for usage and config
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: master
+  rev: v4.2.0
   hooks:
   - id: no-commit-to-branch
     name: Check not master branch
@@ -17,7 +17,7 @@ repos:
     exclude: 'docs/|setup.cfg'
 
 - repo: https://github.com/myint/docformatter
-  rev: master
+  rev: v1.4
   hooks:
   - id: docformatter
 
@@ -28,7 +28,7 @@ repos:
       args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
 
 - repo: https://gitlab.com/pycqa/flake8
-  rev: master
+  rev: 3.9.2
   hooks:
       - id: flake8
   types: [ python ]
@@ -48,12 +48,12 @@ repos:
   ]
 
 - repo: https://github.com/timothycrosley/isort
-  rev: master
+  rev: 5.10.1
   hooks:
       - id: isort
 
 - repo: https://github.com/psf/black
-  rev: 20.8b1
+  rev: 22.3.0
   hooks:
       - id: black
 
@@ -75,7 +75,7 @@ repos:
     require_serial: true
 
 - repo: https://github.com/anmut-consulting/pipenv-setup
-  rev: master
+  rev: v3.1.2
   hooks:
   - id: pipenv-setup-sync
     name: "pipenv-setup sync with pipfile"
