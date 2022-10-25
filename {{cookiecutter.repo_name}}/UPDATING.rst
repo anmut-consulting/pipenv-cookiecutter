@@ -47,8 +47,11 @@ Using Pycharm
         - selecting "Get from branch" from the resulting context menu
         - |get from branch|
 
-    #.  When you're done reviewing all the changes and pulling in the ones you need, simply ``git add``
-        the files you want to commit and proceed as normal.
+    #.  When you're done reviewing all the changes and pulling in the ones you need, execute ``pipenv update`` to make
+        sure that any changes to the Pipfile (packages and dev-packages) from the Cookiecutter update will be synced and
+        locked.
+
+    #.  Finally, ``git add`` the files you want to commit and proceed as normal.
 
 Using command line Git
 ----------------------
