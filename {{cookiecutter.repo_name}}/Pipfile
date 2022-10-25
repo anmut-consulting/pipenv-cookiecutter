@@ -23,7 +23,7 @@ sphinx-rtd-theme = "*"
 jupyter = "*"
 jupyterlab = "*"
 ipython = "*"
-pipenv-setup = { git = 'https://github.com/anmut-consulting/pipenv-setup.git', ref = 'vistir-fix'}
+pipenv-setup = { git = 'https://github.com/anmut-consulting/pipenv-setup.git', ref = 'v3.1.4'}
 
 
 [scripts]
