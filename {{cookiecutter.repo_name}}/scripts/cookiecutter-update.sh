@@ -24,7 +24,6 @@ git checkout $CURRENT_BRANCH USAGE.rst || echo ""
 git checkout $CURRENT_BRANCH HISTORY.rst || echo ""
 git checkout $CURRENT_BRANCH AUTHORS.rst || echo ""
 git add . && git commit -m "Cookiecutter updates" --no-verify
-pipenv update --dev
 git checkout $CURRENT_BRANCH
 git diff ${CURRENT_BRANCH}..cookiecutter-update
 echo "*******************************************************"
