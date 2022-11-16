@@ -16,7 +16,6 @@ pytest-cov = "*"
 sphinx = "*"
 sphinx-autoapi = "*"
 sphinx-rtd-theme = "*"
-jupyter = "*"
 jupyterlab = "*"
 ipython = "*"
 
