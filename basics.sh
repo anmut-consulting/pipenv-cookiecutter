@@ -77,11 +77,10 @@
     echo "export LDFLAGS=-L/usr/local/opt/bzip2/lib" >> ~/.zshrc
     echo "export CPPFLAGS=-I/usr/local/opt/bzip2/include" >> ~/.zshrc
     echo "\n-> installing from pipx:"
-    echo "   pipenv pipenv-pipes pipenv-setup pre-commit"
+    echo "   pipenv pipenv-pipes pre-commit"
     {
         pipx install pipenv
         pipx install pipenv-pipes
-        pipx install pipenv-setup
         pipx install pre-commit
     } && echo "finished installing python tools"
     source ~/.zshrc

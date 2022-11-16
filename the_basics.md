@@ -107,10 +107,8 @@ pipx install pipenv
 #### Install pipenv bolt-on functions
 pipenv-pipes helps you to activate pipenv environments, automatically change to the environment working directory.
 From anywhere, simply type `pipes` to see your environments, select one and enter.
-pipenv-setup helps you to keep your environment and your `setup.py` file in sync via `pipenv-setup sync`
 ```zsh
 pipx install pipenv-pipes
-pipx install pipenv-setup
 ```
 
 #### Set up pre-commit and pre-push hooks
