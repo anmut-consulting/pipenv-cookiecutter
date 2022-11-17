@@ -34,8 +34,6 @@ repos:
         types: [python]
         exclude: setup.py
         additional_dependencies: [
-            'flake8-blind-except',
-            'flake8-commas',
             'flake8-comprehensions',
             'flake8-deprecated',
             'flake8-docstrings',
@@ -46,11 +44,13 @@ repos:
             'flake8-string-format',
             'flake8-tidy-imports',
         ]
+        args: ['--exclude=docs/conf.py', '--ignore=E203,E266,E501,W503', '--max-line-length=88', '--max-complexity=18', '--select=B,C,E,F,W,T4']
 
 - repo: https://github.com/timothycrosley/isort
   rev: 5.10.1
   hooks:
       - id: isort
+        args: ['--multi-line=3', '--trailing-comma', '--force-grid-wrap=0', '--use-parentheses', '--line-length=88', '--skip=docs/conf.py']
 
 - repo: https://github.com/psf/black
   rev: 22.3.0
@@ -61,7 +61,7 @@ repos:
   rev: v0.990
   hooks:
       - id: mypy
-        args: [--no-strict-optional, --ignore-missing-imports]
+        args: [--no-strict-optional, --install-types, --non-interactive, --ignore-missing-imports]
         require_serial: true
 
 - repo: local
@@ -73,7 +73,6 @@ repos:
       "for DIR in $(find \"./{{ cookiecutter.repo_name }}\" -type d); do
         touch $DIR/__init__.py;
       done"
-
 
 - repo: https://github.com/anmut-consulting/pipenv-setup
   rev: v3.1.5
