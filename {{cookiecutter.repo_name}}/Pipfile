@@ -9,22 +9,15 @@ python_version = "{{ cookiecutter.python_version }}"
 [packages]
 
 [dev-packages]
-black = "*"
 bump2version = "*"
-flake8 = "*"
-isort = "*"
-mypy = "*"
 pre-commit = "*"
 pytest = "*"
 pytest-cov = "*"
 sphinx = "*"
 sphinx-autoapi = "*"
 sphinx-rtd-theme = "*"
-jupyter = "*"
 jupyterlab = "*"
 ipython = "*"
-pipenv-setup = { git = 'https://github.com/anmut-consulting/pipenv-setup.git', ref = 'v3.1.4'}
-
 
 [scripts]
 init = "pipenv run $SHELL scripts/init.sh"
