@@ -61,7 +61,7 @@ repos:
   rev: v0.990
   hooks:
       - id: mypy
-        args: [--no-strict-optional, --install-types, --non-interactive, --ignore-missing-imports]
+        args: [--no-strict-optional, --install-types, --non-interactive, --ignore-missing-imports, --disallow-untyped-defs]
         require_serial: true
 
 - repo: local
