@@ -1,1 +1,8 @@
-.. include:: ../HISTORY.rst
+=======
+History
+=======
+
+{{ cookiecutter.version }} ({% now 'local' %})
+------------------
+
+* First release.
