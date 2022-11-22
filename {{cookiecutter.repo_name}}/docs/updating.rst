@@ -6,6 +6,15 @@ Updating {{ cookiecutter.project_name }} from cookiecutter
 This is done to pull in any relevant changes/improvements/features introduced in the central `pipenv-cookiecutter`_
 repo and provides an easy way to stay up to date with the latest new tools/features we introduce at Anmut
 
+.. warning::
+    As of 22/11/2022, there have been major architectural changes to our cookiecutter repository structure.
+    Some of these changes include fixing or including tests that did not run before, either by omission (e.g.
+    parts of Mypy) or because they were configured incorrectly (e.g. Flake8). Therefore, on your first commit and
+    / or push after merging these changes, you are likely to encounter tests failing that previously would pass. This is
+    unfortunately expected behaviour, as many required tests simply did not run before, and so you will have to modify
+    the problematic code in such a way that it is compliant with the requirements of the failing test(s).
+
+
 Update step-by-step:
 ********************
 
