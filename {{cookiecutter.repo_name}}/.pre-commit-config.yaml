@@ -36,7 +36,7 @@ repos:
         exclude: docs/|setup.py|tests/
         types: [python]
         additional_dependencies: [
-            'flake8-blind-except'
+            'flake8-blind-except',
             'flake8-comprehensions',
             'flake8-deprecated',
             'flake8-docstrings',
