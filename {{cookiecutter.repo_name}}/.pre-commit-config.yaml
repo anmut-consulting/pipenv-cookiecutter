@@ -20,20 +20,23 @@ repos:
   rev: v1.4
   hooks:
   - id: docformatter
+    exclude: docs/|setup.py|tests/
 
 - repo: https://github.com/humitos/mirrors-autoflake
   rev: v1.1
   hooks:
     - id: autoflake
+      exclude: docs/|setup.py|tests/
       args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
 
 - repo: https://github.com/PyCQA/flake8
   rev: 3.9.2
   hooks:
       - id: flake8
+        exclude: docs/|setup.py|tests/
         types: [python]
-        exclude: setup.py
         additional_dependencies: [
+            'flake8-blind-except'
             'flake8-comprehensions',
             'flake8-deprecated',
             'flake8-docstrings',
@@ -44,24 +47,27 @@ repos:
             'flake8-string-format',
             'flake8-tidy-imports',
         ]
-        args: ['--exclude=docs/conf.py', '--ignore=E203,E266,E501,W503', '--max-line-length=88', '--max-complexity=18', '--select=B,C,E,F,W,T4']
+        args: ['--ignore=E203,E266,E501,W503', '--max-line-length=88', '--max-complexity=18', '--select=B,C,E,F,W,T4']
 
 - repo: https://github.com/timothycrosley/isort
   rev: 5.10.1
   hooks:
       - id: isort
-        args: ['--multi-line=3', '--trailing-comma', '--force-grid-wrap=0', '--use-parentheses', '--line-length=88', '--skip=docs/conf.py']
+        exclude: docs/|setup.py|tests/
+        args: ['--multi-line=3', '--trailing-comma', '--force-grid-wrap=0', '--use-parentheses', '--line-length=88']
 
 - repo: https://github.com/psf/black
   rev: 22.3.0
   hooks:
       - id: black
+        exclude: docs/|setup.py|tests/
 
 - repo: https://github.com/pre-commit/mirrors-mypy
   rev: v0.990
   hooks:
       - id: mypy
-        args: [--no-strict-optional, --install-types, --non-interactive, --ignore-missing-imports, --disallow-untyped-defs]
+        exclude: docs/|setup.py|tests/
+        args: ['--no-strict-optional', '--install-types', '--non-interactive', '--ignore-missing-imports', '--disallow-untyped-defs']
         require_serial: true
 
 - repo: local
