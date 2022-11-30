@@ -24,7 +24,7 @@ import sys
 
 try:
     import {{cookiecutter.repo_name}}
-except Exception: # noqa: B902
+except Exception:  # noqa: B902
     sys.path.insert(0, os.path.abspath(".."))
     import {{cookiecutter.repo_name}}
 
