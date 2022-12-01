@@ -25,7 +25,6 @@ repos:
   rev: v1.1
   hooks:
     - id: autoflake
-      exclude: setup.py
       args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
 
 - repo: https://github.com/PyCQA/flake8

@@ -13,9 +13,9 @@ with open("README.rst") as readme_file:
 with open("HISTORY.rst") as history_file:
     history = history_file.read()
 
-setup_requirements = ["pytest-runner"]  # type: List[str]
+setup_requirements = ["pytest-runner"]
 
-test_requirements = ["pytest"]  # type: List[str]
+test_requirements = ["pytest"]
 
 {%- set license_classifiers = {
     "MIT license": "License :: OSI Approved :: MIT License",
