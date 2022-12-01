@@ -71,9 +71,10 @@ repos:
     name: add_inits
     language: system
     entry: bash -c \
-      "for DIR in $(find \"./event_analysis\" -type d); do
+      "for DIR in $(find \"./{{ cookiecutter.repo_name }}\" -type d); do
         touch $DIR/__init__.py;
       done"
+
 
 - repo: https://github.com/anmut-consulting/pipenv-setup
   rev: v3.1.5
