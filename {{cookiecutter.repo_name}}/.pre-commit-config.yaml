@@ -17,7 +17,7 @@ repos:
     exclude: docs/|setup.cfg
 
 - repo: https://github.com/myint/docformatter
-  rev: v1.4
+  rev: v1.5.0 # v1.5.1 gives unwanted formatting behaviour relating to https://github.com/PyCQA/docformatter/issues/124, please use v1.5.0 until a new stable release patches this
   hooks:
   - id: docformatter
 
@@ -48,7 +48,7 @@ repos:
         args: ['--ignore=E203,E266,E501,W503', '--max-line-length=88', '--max-complexity=18', '--select=B,C,E,F,W,T4']
 
 - repo: https://github.com/timothycrosley/isort
-  rev: 5.10.1
+  rev: 5.12.0
   hooks:
       - id: isort
         args: ['--multi-line=3', '--trailing-comma', '--force-grid-wrap=0', '--use-parentheses', '--line-length=88']
