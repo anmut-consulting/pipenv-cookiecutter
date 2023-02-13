@@ -66,7 +66,6 @@
     echo "this is a minimal list to get you started"
     {
         brew install --cask docker
-        brew install --cask dashlane
         brew install --cask dbeaver-community
         brew install --cask sublime-text
         brew install --cask the-unarchiver
