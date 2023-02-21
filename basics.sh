@@ -1,6 +1,17 @@
 #!/usr/bin/env sh
+
+# NB: All instances of echo have been replaced with printf, due to echo
+# having inconsistent behaviour between different shells. echo was used for
+# printing messages to the shell, and inserting code into the .zshrc file, but
+# does not escape newline characters correctly, which causes messages to be
+# displayed with \n literally printed, and for \n to literally inserted into
+# the .zsh file, instead of being escaped as expected.
+# Therefore, printf is used instead, which behaves as we want, escaping \n
+# characters properly.
+
 (
     printf "\n-> installing xcode: \n\n"
+    # Check if xcode configured and if not set it up on your machine
     if ! [[ -x $(xcode-select -p) ]];
     then 
         xcode-select -s /Applications/Xcode.app/Contents/Developer \
@@ -16,6 +27,9 @@
     || printf "\n"
     printf "\n-> installing homebrew: \n\n"
     {
+        # Check if brew is installed, if not, download the install script using
+        # curl, run it and return to this script after the installation is
+        # complete.
         if ! [[ $(brew --version) ]];
         then
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -48,6 +62,20 @@
         }
     } \
     && printf "\n-> packages installed from brew! <-\n\n"
+
+    # Create a zshrc file if it does not exist already. If it does, touch will
+    # simply update the timestamp of the file.
+    #
+    # The zshrc file stands for zsh run command and is a file used to customise
+    # your shell environment. It contains a list of commands that are run every
+    # time a new terminal window is opened.
+    # Here we are adding environment variables to the file for pyenv, one of the
+    # python virtual environment systems.
+
+    # For each line to be inserted into the file, we first check if the line
+    # already exists in the file using grep, and only if it's not present is it
+    # added in. This prevents these env variables being added twice if this
+    # script is ever re-run.
     touch ~/.zshrc
     if ! grep -Fxq 'export PYENV_ROOT="$HOME/.pyenv"' ~/.zshrc
     then
@@ -57,11 +85,20 @@
     then
         printf 'export PATH="$PYENV_ROOT:$PATH"\n' >> ~/.zshrc
     fi
+
+    # Insert the pyenv init command into zshrc if it does not already exist. The
+    # inserted code first checks if pyenv is installed and if present will
+    # configure pyenv as a shell function and enable shims and shell
+    # autocompletion.
     if ! grep -Fxq 'if command -v pyenv 1>/dev/null 2>&1; then' ~/.zshrc
     then
         printf 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi\n' >> ~/.zshrc
     fi
+
+    # Re-initialise the shell environment, loading the above shell variables
+    # and running the pyenv init command
     source ~/.zshrc
+
     printf "\n-> installing software from homebrew casks:\n"
     printf "this is a minimal list to get you started\n"
     {
@@ -72,6 +109,9 @@
         brew install --cask drawio
         pipx ensurepath && source ~/.zshrc
     } && printf "\n-> installation from homebrew casks successfully <-\n\n"
+
+    # Insert compiler flags to the zshrc file only if they're not already
+    # present
     printf "Adding compiler flags for bzip2\n"
     if ! grep -Fxq 'export LDFLAGS=-L/usr/local/opt/bzip2/lib' ~/.zshrc
     then
@@ -88,7 +128,11 @@
         pipx install pipenv-pipes
         pipx install pre-commit
     } && printf "finished installing python tools\n"
+
+    # Re-initialise the shell environment again, reflecting the changes made
+    # above.
     source ~/.zshrc
+
     printf "\n-> pipx installations complete <-\n" \
     && printf "\n-> configuring git to run pre-commit hooks, when found, automatically:\n" \
     && git config --global init.templateDir ~/.git-template \
