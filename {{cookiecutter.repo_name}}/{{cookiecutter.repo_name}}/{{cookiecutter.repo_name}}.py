@@ -22,7 +22,7 @@ def fib(n: int) -> int:
         return fib(n - 1) + fib(n - 2)
 
 
-def fib_ratio(n):
+def fib_ratio(n) -> float:
     """Fibonacci Ratio Generator.
 
     This will give you the n'th ratio in the Fibonacci sequence
