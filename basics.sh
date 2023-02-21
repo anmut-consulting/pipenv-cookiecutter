@@ -1,14 +1,4 @@
 #!/usr/bin/env sh
-
-# NB: All instances of echo have been replaced with printf, due to echo
-# having inconsistent behaviour between different shells. echo was used for
-# printing messages to the shell, and inserting code into the .zshrc file, but
-# does not escape newline characters correctly, which causes messages to be
-# displayed with \n literally printed, and for \n to literally inserted into
-# the .zsh file, instead of being escaped as expected.
-# Therefore, printf is used instead, which behaves as we want, escaping \n
-# characters properly.
-
 (
     printf "\n-> installing xcode: \n\n"
     # Check if xcode configured and if not set it up on your machine
@@ -25,6 +15,7 @@
     xcode-select --install \
     && printf "\n-> xcode cli installed <-\n\n" \
     || printf "\n"
+
     printf "\n-> installing homebrew: \n\n"
     {
         # Check if brew is installed, if not, download the install script using
@@ -77,6 +68,7 @@
     # added in. This prevents these env variables being added twice if this
     # script is ever re-run.
     touch ~/.zshrc
+
     if ! grep -Fxq 'export PYENV_ROOT="$HOME/.pyenv"' ~/.zshrc
     then
         printf 'export PYENV_ROOT="$HOME/.pyenv"\n' >> ~/.zshrc
@@ -121,6 +113,7 @@
         then
     printf "export CPPFLAGS=-I/usr/local/opt/bzip2/include\n" >> ~/.zshrc
     fi
+
     printf "\n-> installing from pipx:\n"
     printf "   pipenv pipenv-pipes pre-commit\n"
     {
