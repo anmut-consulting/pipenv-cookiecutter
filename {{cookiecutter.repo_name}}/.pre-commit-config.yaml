@@ -81,6 +81,8 @@ repos:
   hooks:
   - id: pipenv-setup-sync
     stages: [push]
+    args: ['--process-dependency-links']
 
   - id: pipenv-setup-check
     stages: [push]
+    args: ['--lockfile']
