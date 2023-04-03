@@ -18,11 +18,6 @@ jobs:
       with:
           python-version: {{ cookiecutter.python_version }}
 
-    - name: Install dependencies with pipenv
-      run: |
-          pip install pipenv
-          pipenv sync --dev
-
     - uses: pre-commit/action@v2.0.0
       with:
         token: ${{ '{{' }} secrets.GITHUB_TOKEN {{ '}}' }}
