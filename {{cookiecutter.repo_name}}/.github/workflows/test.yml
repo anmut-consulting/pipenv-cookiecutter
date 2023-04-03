@@ -13,19 +13,10 @@ jobs:
       with:
         fetch-depth: 0
 
-    - uses: webfactory/ssh-agent@v0.4.1
-      with:
-        ssh-private-key: ${{ '{{' }} secrets.SSH_PRIVATE_KEY {{ '}}' }}
-
     - name: Setup Python
       uses: actions/setup-python@master
       with:
           python-version: {{ cookiecutter.python_version }}
-
-    - name: Install dependencies with pipenv
-      run: |
-          pip install pipenv
-          pipenv sync --dev
 
     - uses: pre-commit/action@v2.0.0
       with:
