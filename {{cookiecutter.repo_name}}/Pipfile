@@ -29,5 +29,5 @@ coverage = "pipenv run pytest --cov --cov-fail-under=100 --cov-report term-missi
 tests = "pipenv run pre-commit run -a"
 test = "pipenv run pytest"
 make_docs = "pipenv run $SHELL scripts/make_docs.sh"
-create_ipykernel = "pipenv run python -m ipykernel install --name {{ cookiecutter.repo_name }} --display-name \"{{ cookiecutter.project_name }}\" "
+create_ipykernel = "pipenv run python -m ipykernel install --user --name {{ cookiecutter.repo_name }} --display-name \"{{ cookiecutter.project_name }}\" "
 remove_ipykernel = "pipenv run jupyter kernelspec remove {{ cookiecutter.repo_name }} "
