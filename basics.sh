@@ -16,14 +16,19 @@
     && printf "\n-> xcode cli installed <-\n\n" \
     || printf "\n"
 
-    printf "\n-> installing homebrew: \n\n"
     {
-        # Check if brew is installed, if not, download the install script using
-        # curl, run it and return to this script after the installation is
-        # complete.
+        # Check if brew is installed, if not, download the install script using curl
         if ! [[ $(brew --version) ]];
         then
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+          # if running on an Apple Silicon-based machine, we must add to PATH manually
+          UNAME_MACHINE="$(/usr/bin/uname -m)"
+          if [[ "${UNAME_MACHINE}" == "arm64" ]]
+          then
+            printf 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+          fi
         fi \
         && printf "\n-> homebrew installed <-\n\n" \
         && printf "\n-> installing from brew:\n" \
