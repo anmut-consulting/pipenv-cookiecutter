@@ -16,6 +16,7 @@
     && printf "\n-> xcode cli installed <-\n\n" \
     || printf "\n"
 
+    printf "\n-> installing homebrew: \n\n"
     {
         # Check if brew is installed, if not, download the install script using curl
         if ! [[ $(brew --version) ]];
