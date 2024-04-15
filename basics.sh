@@ -18,12 +18,12 @@
 
     printf "\n-> installing homebrew: \n\n"
     {
-        # Check if brew is installed, if not, download the install script using curl
+        # Check if brew is installed, if not, downloads the install script using curl and runs
         if ! [[ $(brew --version) ]];
         then
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-          # if running on an Apple Silicon-based machine, we must add to PATH manually
+          # if running on an Apple silicon-based machine, we must add to PATH manually
           UNAME_MACHINE="$(/usr/bin/uname -m)"
           if [[ "${UNAME_MACHINE}" == "arm64" ]]
           then
