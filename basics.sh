@@ -1,4 +1,12 @@
 #!/usr/bin/env sh
+
+# Check if running on MacOS, if not, abort with error exit code
+if [[ $(uname) != "Darwin" ]]
+then
+  printf 'This script must be run on a MacOS machine. Exiting!\n'
+  exit 1
+fi
+
 (
     printf "\n-> installing xcode: \n\n"
     # Check if xcode configured and if not set it up on your machine
@@ -16,22 +24,68 @@
     && printf "\n-> xcode cli installed <-\n\n" \
     || printf "\n"
 
-    printf "\n-> installing homebrew: \n\n"
+    printf "\n-> installing homebrew and packages through homebrew \n\n"
     {
-        # Check if brew is installed, if not, downloads the install script using curl and runs
+        # Check if brew is installed, if not, download the install script using curl and run
         if ! [[ $(brew --version) ]];
         then
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          printf "Brew not currently installed, trying installation now."
 
-          # if running on an Apple silicon-based machine, we must add to PATH manually
-          UNAME_MACHINE="$(/usr/bin/uname -m)"
-          if [[ "${UNAME_MACHINE}" == "arm64" ]]
-          then
-            printf 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-            eval "$(/opt/homebrew/bin/brew shellenv)"
+          # Check what type of shell is configured, and set the appropriate shell config
+          # file
+          SHELL_TYPE=$SHELL
+          config_file=''
+          if [[ "${SHELL_TYPE}" == "/bin/zsh" ]]; then
+            config_file="${HOME}/.zprofile"
+          elif [[ "${SHELL_TYPE}" == "/bin/bash" ]]; then
+            config_file="${HOME}/.bash_profile"
+          else
+            printf 'Your shell is not zsh or bash! Install Brew manually and rerun this script. Exiting!\n'
+            exit 1
           fi
+
+          # Check if Intel or Apple Silicone architecture, and set brew prefix (install
+          # location) as appropriate
+          MACHINE_ARCHITECTURE="$(/usr/bin/uname -m)"
+          installation_dir=''
+          if [[ "${MACHINE_ARCHITECTURE}" == "arm64" ]]; then
+            installation_dir='/opt/homebrew'
+          elif [[ "${MACHINE_ARCHITECTURE}" == "x86_64" ]]; then
+            installation_dir='/usr/local'
+          else
+            printf 'The processor architecture of your Mac is not supported by this script. Install Brew manually and rerun this script. Exiting!\n'
+            exit 1
+          fi
+
+          # Download brew install script using curl and run.
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          printf "Brew binaries installed."
+
+          # Create eval command to be outputted into shell configuration file
+          eval_command="eval \"\$(${installation_dir}/bin/brew shellenv)\""
+          printf "Adding brew shell environment configuration command to '%s'.\n" "${config_file}"
+          printf "This ensures brew environment variables are configured correctly every terminal session.\n"
+
+          # Ensure that we only add the eval command if command not already present in the config file
+          # Then add the command to the shell config file. This adds brew to path
+          # and configures the other environment variables correctly.
+          if ! grep -Fxq "${eval_command}" "${config_file}"; then
+            # Add newline before and after in case config file does not end with one
+            printf "\n%s\n" "${eval_command}" >> "${config_file}"
+          fi
+
+          printf "\nConfiguring brew to work in current session!\n"
+          eval "$(${installation_dir}/bin/brew shellenv)"
+
+          # Check brew installation and adding to path was successful
+          if ! [[ $(brew --version) ]]; then
+            printf "\nAdding brew to path was unsuccessful. Exiting!\n"
+            exit 1;
+          fi
+
+
         fi \
-        && printf "\n-> homebrew installed <-\n\n" \
+        && printf "\n-> homebrew installed and configured <-\n\n" \
         && printf "\n-> installing from brew:\n" \
         && printf "     zsh python3 cmake git htop openssl readline sqlite3 tree unar xz zlib pipx pyenv\n\n" \
         && {
