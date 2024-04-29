@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Check if running on MacOS, if not, abort with error exit code
 if [[ $(uname) != "Darwin" ]]
