@@ -61,10 +61,11 @@ fi
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           printf "Brew binaries installed.\n"
 
+          printf "\nAdding brew shell environment configuration command to '%s'.\n" "${config_file}"
+          printf "This ensures brew environment variables are configured correctly every terminal session.\n"
+
           # Create eval command to be outputted into shell configuration file
           eval_command="eval \"\$(${installation_dir}/bin/brew shellenv)\""
-          printf "Adding brew shell environment configuration command to '%s'.\n" "${config_file}"
-          printf "This ensures brew environment variables are configured correctly every terminal session.\n"
 
           # Ensure that we only add the eval command if command not already present in the config file
           # Then add the command to the shell config file. This adds brew to path
@@ -79,10 +80,11 @@ fi
 
           # Check brew installation and adding to path was successful
           if ! [[ $(brew --version) ]]; then
-            printf "\nAdding brew to path was unsuccessful. Exiting!\n"
+            printf "Adding brew to path in session was unsuccessful. Exiting!\n"
             exit 1;
+          else
+            printf "Brew is now in path for this session.\n"
           fi
-
 
         fi \
         && printf "\n-> homebrew installed and configured <-\n\n" \
