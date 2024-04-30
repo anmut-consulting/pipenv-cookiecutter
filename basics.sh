@@ -29,7 +29,7 @@ fi
         # Check if brew is installed, if not, download the install script using curl and run
         if ! [[ $(brew --version) ]];
         then
-          printf "Brew not currently installed, trying installation now."
+          printf "Brew not currently installed, trying installation now.\n"
 
           # Check what type of shell is configured, and set the appropriate shell config
           # file
@@ -59,7 +59,7 @@ fi
 
           # Download brew install script using curl and run.
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          printf "Brew binaries installed."
+          printf "Brew binaries installed.\n"
 
           # Create eval command to be outputted into shell configuration file
           eval_command="eval \"\$(${installation_dir}/bin/brew shellenv)\""
