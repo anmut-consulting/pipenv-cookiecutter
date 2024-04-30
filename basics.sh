@@ -29,7 +29,7 @@ fi
         # Check if brew is installed, if not, download the install script using curl and run
         if ! [[ $(brew --version) ]];
         then
-          printf "Brew not currently installed, trying installation now.\n"
+          printf "Homebrew not currently installed, trying installation now.\n"
 
           # Check what type of shell is configured, and set the appropriate shell config
           # file
@@ -40,7 +40,7 @@ fi
           elif [[ "${SHELL_TYPE}" == "/bin/bash" ]]; then
             config_file="${HOME}/.bash_profile"
           else
-            printf 'Your shell is not zsh or bash! Install Brew manually and rerun this script. Exiting!\n'
+            printf 'Your shell is not zsh or bash! Install Homebrew manually and rerun this script. Exiting!\n'
             exit 1
           fi
 
@@ -53,13 +53,13 @@ fi
           elif [[ "${MACHINE_ARCHITECTURE}" == "x86_64" ]]; then
             installation_dir='/usr/local'
           else
-            printf 'The processor architecture of your Mac is not supported by this script. Install Brew manually and rerun this script. Exiting!\n'
+            printf 'The processor architecture of your Mac is not supported by this script. Install Homebrew manually and rerun this script. Exiting!\n'
             exit 1
           fi
 
           # Download brew install script using curl and run.
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          printf "Brew binaries installed.\n"
+          printf "Homebrew binaries installed.\n"
 
           printf "\nAdding brew shell environment configuration command to '%s'.\n" "${config_file}"
           printf "This ensures brew environment variables are configured correctly every terminal session.\n"
@@ -80,10 +80,10 @@ fi
 
           # Check brew installation and adding to path was successful
           if ! [[ $(brew --version) ]]; then
-            printf "Adding brew to path in session was unsuccessful. Exiting!\n"
+            printf "Adding Homebrew to path in session was unsuccessful. Exiting!\n"
             exit 1;
           else
-            printf "Brew is now in path for this session.\n"
+            printf "Homebrew is now in path for this session.\n"
           fi
 
         fi \
