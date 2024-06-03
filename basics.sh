@@ -1,12 +1,4 @@
 #!/usr/bin/env bash
-
-# Check if running on MacOS, if not, abort with error exit code
-if [[ $(uname) != "Darwin" ]]
-then
-  printf 'This script must be run on a MacOS machine. Exiting!\n'
-  exit 1
-fi
-
 (
     printf "\n-> installing xcode: \n\n"
     # Check if xcode configured and if not set it up on your machine
