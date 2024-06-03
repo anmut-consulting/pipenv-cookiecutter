@@ -72,10 +72,10 @@
 
           # Check brew installation and adding to path was successful
           if ! [[ $(brew --version) ]]; then
-            printf "Adding Homebrew to path in session was unsuccessful. Exiting!\n"
+            printf "Adding Homebrew to path in session was unsuccessful. Please contact the owner of the script for help!\n"
             exit 1;
           else
-            printf "Homebrew is now in path for this session.\n"
+            printf "Homebrew is now in path for this session. Continuing...\n"
           fi
 
         fi \
