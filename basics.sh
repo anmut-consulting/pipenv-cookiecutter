@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 (
     printf "\n-> installing xcode: \n\n"
     # Check if xcode configured and if not set it up on your machine
@@ -16,16 +16,70 @@
     && printf "\n-> xcode cli installed <-\n\n" \
     || printf "\n"
 
-    printf "\n-> installing homebrew: \n\n"
+    printf "\n-> installing homebrew and packages through homebrew \n\n"
     {
-        # Check if brew is installed, if not, download the install script using
-        # curl, run it and return to this script after the installation is
-        # complete.
+        # Check if brew is installed, if not, download the install script using curl and run
         if ! [[ $(brew --version) ]];
         then
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          printf "Homebrew not currently installed, trying installation now.\n"
+
+          # Check what type of shell is configured, and set the appropriate shell config
+          # file
+          SHELL_TYPE=$SHELL
+          config_file=''
+          if [[ "${SHELL_TYPE}" == "/bin/zsh" ]]; then
+            config_file="${HOME}/.zprofile"
+          elif [[ "${SHELL_TYPE}" == "/bin/bash" ]]; then
+            config_file="${HOME}/.bash_profile"
+          else
+            printf 'Your shell is not zsh or bash! Install Homebrew manually and rerun this script. Exiting!\n'
+            exit 1
+          fi
+
+          # Check if Intel or Apple Silicone architecture, and set brew prefix (install
+          # location) as appropriate
+          MACHINE_ARCHITECTURE="$(/usr/bin/uname -m)"
+          installation_dir=''
+          if [[ "${MACHINE_ARCHITECTURE}" == "arm64" ]]; then
+            installation_dir='/opt/homebrew'
+          elif [[ "${MACHINE_ARCHITECTURE}" == "x86_64" ]]; then
+            installation_dir='/usr/local'
+          else
+            printf 'The processor architecture of your Mac is not supported by this script. Install Homebrew manually and rerun this script. Exiting!\n'
+            exit 1
+          fi
+
+          # Download brew install script using curl and run.
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          printf "Homebrew binaries installed.\n"
+
+          printf "\nAdding brew shell environment configuration command to '%s'.\n" "${config_file}"
+          printf "This ensures brew environment variables are configured correctly every terminal session.\n"
+
+          # Create eval command to be outputted into shell configuration file
+          eval_command="eval \"\$(${installation_dir}/bin/brew shellenv)\""
+
+          # Ensure that we only add the eval command if command not already present in the config file
+          # Then add the command to the shell config file. This adds brew to path
+          # and configures the other environment variables correctly.
+          if ! grep -Fxq "${eval_command}" "${config_file}"; then
+            # Add newline before and after in case config file does not end with one
+            printf "\n%s\n" "${eval_command}" >> "${config_file}"
+          fi
+
+          printf "\nConfiguring brew to work in current session!\n"
+          eval "$(${installation_dir}/bin/brew shellenv)"
+
+          # Check brew installation and adding to path was successful
+          if ! [[ $(brew --version) ]]; then
+            printf "Adding Homebrew to path in session was unsuccessful. Please contact the owner of the script for help!\n"
+            exit 1;
+          else
+            printf "Homebrew is now in path for this session. Continuing...\n"
+          fi
+
         fi \
-        && printf "\n-> homebrew installed <-\n\n" \
+        && printf "\n-> homebrew installed and configured <-\n\n" \
         && printf "\n-> installing from brew:\n" \
         && printf "     zsh python3 cmake git htop openssl readline sqlite3 tree unar xz zlib pipx pyenv\n\n" \
         && {
