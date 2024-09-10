@@ -160,6 +160,6 @@ git push -u origin master OR git push (if you have successfully ran the first pu
 
 ## Updating projects already generated with this cookiecutter:
 From time to time, we update this cookiecutter to reflect changes to our tooling and introduce automations and improvements.
-When you want to pull those changes into a repository that you've already created, you can follow [this guide](./{{cookiecutter.repo_name}}/UPDATING.rst)
+When you want to pull those changes into a repository that you've already created, you can follow [this guide](./{{cookiecutter.repo_name}}/docs/updating.rst)
 
 **You're all set! Happy coding!**
