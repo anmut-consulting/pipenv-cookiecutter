@@ -18,7 +18,7 @@ jobs:
       with:
           python-version: {{ cookiecutter.python_version }}
 
-    - uses: pre-commit/action@v2.0.0
+    - uses: pre-commit/action@v3.0.1
       with:
         token: ${{ '{{' }} secrets.GITHUB_TOKEN {{ '}}' }}
 
